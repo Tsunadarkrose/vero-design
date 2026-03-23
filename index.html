@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VÉRO — Design que Conecta e Vende</title>
+  <meta name="description"
+    content="Design minimalista focado em conexão humana e resultados reais. Transformo sua visão em uma narrativa digital que vende." />
+
+  <!-- Satoshi via Fontshare -->
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            satoshi: ['Satoshi', 'sans-serif'],
+          },
+          colors: {
+            offwhite: '#F9F9F9',
+            bordo: '#630D16',
+            'bordo-dark': '#4a0910',
+            'bordo-light': '#7a1020',
+          },
+          letterSpacing: {
+            tightest: '-0.04em',
+            tighter: '-0.03em',
+          },
+          lineHeight: {
+            hero: '1.08',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* -"?-"?-"? Film Grain Overlay -"?-"?-"? */
+    @keyframes grain {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      10% {
+        transform: translate(-2%, -3%);
+      }
+
+      20% {
+        transform: translate(3%, 2%);
+      }
+
+      30% {
+        transform: translate(-1%, 4%);
+      }
+
+      40% {
+        transform: translate(4%, -2%);
+      }
+
+      50% {
+        transform: translate(-3%, 1%);
+      }
+
+      60% {
+        transform: translate(2%, 3%);
+      }
+
+      70% {
+        transform: translate(-4%, -1%);
+      }
+
+      80% {
+        transform: translate(1%, -4%);
+      }
+
+      90% {
+        transform: translate(3%, -3%);
+      }
+    }
+
+    .grain-overlay::before {
+      content: '';
+      position: fixed;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      opacity: 0.035;
+      pointer-events: none;
+      animation: grain 0.6s steps(1) infinite;
+      z-index: 9999;
+      mix-blend-mode: overlay;
+    }
+
+    /* -"?-"?-"? Cursor Glow -"?-"?-"? */
+    .cursor-glow {
+      position: fixed;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 13, 22, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.4s ease;
+      z-index: 1;
+    }
+
+    /* -"?-"?-"? Headline gradient -"?-"?-"? */
+    .heading-gradient {
+      background: linear-gradient(135deg, #1a1a1a 0%, #3d1219 60%, #630D16 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* -"?-"?-"? Badge pulse -"?-"?-"? */
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.7);
+      }
+    }
+
+    .pulse-dot {
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    /* -"?-"?-"? Motion Design -- clay asset -"?-"?-"? */
+    /* Camada 1: flutuação Y + leve drift X */
+    @keyframes clay-float {
+      0% {
+        transform: translateY(0px) translateX(0px);
+      }
+
+      25% {
+        transform: translateY(-18px) translateX(5px);
+      }
+
+      50% {
+        transform: translateY(-10px) translateX(-4px);
+      }
+
+      75% {
+        transform: translateY(-20px) translateX(3px);
+      }
+
+      100% {
+        transform: translateY(0px) translateX(0px);
+      }
+    }
+
+    /* Camada 2: rotação 3D lenta */
+    @keyframes clay-tilt {
+      0% {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      }
+
+      20% {
+        transform: rotateX(4deg) rotateY(-6deg) rotateZ(1deg);
+      }
+
+      40% {
+        transform: rotateX(-3deg) rotateY(5deg) rotateZ(-1.5deg);
+      }
+
+      60% {
+        transform: rotateX(5deg) rotateY(-4deg) rotateZ(0.5deg);
+      }
+
+      80% {
+        transform: rotateX(-2deg) rotateY(6deg) rotateZ(-1deg);
+      }
+
+      100% {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      }
+    }
+
+    /* Camada 3: scale respira */
+    @keyframes clay-breathe {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.045);
+      }
+    }
+
+    /* Camada 4: sombra pulsa */
+    @keyframes clay-shadow {
+
+      0%,
+      100% {
+        filter: drop-shadow(0 28px 40px rgba(99, 13, 22, 0.18)) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.10));
+      }
+
+      50% {
+        filter: drop-shadow(0 44px 60px rgba(99, 13, 22, 0.28)) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.14));
+      }
+    }
+
+    /* Wrapper: float + breathe em camadas separadas */
+    .float-asset {
+      animation: clay-float 8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+      will-change: transform;
+    }
+
+    /* Tilt no filho interno */
+    .clay-tilt {
+      animation: clay-tilt 11s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* A própria imagem: breathe + shadow */
+    .clay-img {
+      animation:
+        clay-breathe 5s ease-in-out infinite,
+        clay-shadow 8s ease-in-out infinite;
+      will-change: transform, filter;
+    }
+
+    /* -"?-"?-"? Scroll fade-in -"?-"?-"? */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* -"?-"?-"? Button glow on hover -"?-"?-"? */
+    .btn-bordo {
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.35s ease, transform 0.25s ease, background-color 0.3s ease;
+    }
+
+    .btn-bordo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 120%, rgba(255, 255, 255, 0.18) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .btn-bordo:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(99, 13, 22, 0.38), 0 0 0 1px rgba(99, 13, 22, 0.15);
+      background-color: #7a1020;
+    }
+
+    .btn-bordo:hover::after {
+      opacity: 1;
+    }
+
+    .btn-bordo:active {
+      transform: translateY(0px);
+    }
+
+    /* -"?-"?-"? Scrollbar -"?-"?-"? */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #F9F9F9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #d4b0b4;
+      border-radius: 9px;
+    }
+
+    /* Mobile adjustments are handled by Tailwind classes natively */
+  </style>
+</head>
+
+<body
+  class="grain-overlay font-satoshi bg-offwhite text-[#1a1a1a] antialiased selection:bg-bordo selection:text-white overflow-x-hidden">
+
+  <!-- Cursor Glow -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.-
+       NAV
+  --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.- -->
+  <nav class="fixed top-0 left-0 right-0 z-50 px-8 md:px-16 py-6 flex items-center justify-between">
+    <!-- Glass blur background -->
+    <div class="absolute inset-0 backdrop-blur-md bg-[#F9F9F9]/60 border-b border-black/[0.04]"></div>
+
+    <!-- Logo -->
+    <a href="#" class="relative z-10 flex items-center">
+      <img src="public/ChatGPT Image 23 de mar. de 2026, 11_55_59.png" alt="Logo" class="h-24 w-auto object-contain" />
+    </a>
+
+    <!-- Nav Links -->
+    <div class="relative z-10 hidden md:flex items-center gap-10">
+      <a href="#trabalhos"
+        class="text-sm font-[400] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors duration-200">Trabalhos</a>
+      <a href="#sobre"
+        class="text-sm font-[400] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors duration-200">Sobre</a>
+      <a href="#contato"
+        class="text-sm font-[400] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors duration-200">Contato</a>
+    </div>
+
+    <!-- Nav CTA -->
+    <a href="https://wa.me/5521988138633?text=Ol%C3%A1!+Vim+pela+V%C3%A9ro+e+gostaria+de+conversar+sobre+um+projeto."
+      target="_blank"
+      class="relative z-10 btn-bordo bg-bordo text-white text-xs font-[500] tracking-[0.1em] uppercase px-5 py-2.5 rounded-[6px] flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+      </svg>
+      Iniciar projeto
+    </a>
+  </nav>
+
+  <!-- --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.-
+       HERO SECTION
+  --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.- -->
+  <main class="relative min-h-screen flex items-center pt-24 pb-16 px-8 md:px-16 lg:px-24">
+
+    <!-- Background decorative elements -->
+    <div
+      class="absolute top-1/4 left-0 w-[420px] h-[420px] rounded-full bg-[#630D16]/[0.04] blur-[90px] pointer-events-none">
+    </div>
+    <div
+      class="absolute bottom-1/4 right-0 w-[300px] h-[300px] rounded-full bg-[#630D16]/[0.05] blur-[70px] pointer-events-none">
+    </div>
+
+    <div class="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
+
+      <!-- -"?-"? LEFT: Text Content -"?-"? -->
+      <div class="flex flex-col gap-8">
+
+        <!-- Availability badge -->
+        <div class="reveal flex items-center gap-3" style="transition-delay: 0ms;">
+          <div class="flex items-center gap-2 px-3.5 py-1.5 bg-white border border-black/[0.07] rounded-full shadow-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-dot"></span>
+            <span class="text-[11px] font-[500] tracking-[0.12em] uppercase text-[#6b6b6b]">Disponível para
+              projetos</span>
+          </div>
+        </div>
+
+        <!-- Hero Headline -->
+        <div class="reveal" style="transition-delay: 80ms;">
+          <h1
+            class="font-satoshi font-[500] text-[2.6rem] md:text-[3.4rem] lg:text-[3.8rem] xl:text-[4.2rem] leading-[1.06] tracking-[-0.03em]">
+            <span class="heading-gradient">Transformo sua visão</span><br />
+            <span class="text-[#1a1a1a]">em uma narrativa</span><br />
+            <span class="relative inline-block">
+              <span class="heading-gradient">digital que vende.</span>
+              <!-- Underline accent -->
+              <svg class="absolute -bottom-2 left-0 w-full" height="4" viewBox="0 0 400 4" fill="none"
+                xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path d="M2 2 Q200 0.5 398 2" stroke="#630D16" stroke-width="2.5" stroke-linecap="round"
+                  opacity="0.45" />
+              </svg>
+            </span>
+          </h1>
+        </div>
+
+        <!-- Subheading -->
+        <div class="reveal" style="transition-delay: 160ms;">
+          <p class="font-satoshi font-[400] text-[1.05rem] md:text-[1.1rem] text-[#6e6e6e] leading-[1.7] max-w-[420px]">
+            Design minimalista focado em<br class="hidden md:block" />
+            <strong class="font-[500] text-[#3d3d3d]">conexão humana</strong> e <strong
+              class="font-[500] text-[#3d3d3d]">resultados reais.</strong>
+          </p>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="reveal flex flex-wrap items-center gap-4" style="transition-delay: 240ms;">
+          <!-- Primary CTA -- WhatsApp -->
+          <a href="https://wa.me/5521988138633?text=Ol%C3%A1!+Vim+pela+V%C3%A9ro+e+gostaria+de+conversar+sobre+um+projeto."
+            target="_blank"
+            class="btn-bordo bg-bordo text-white font-[500] text-sm tracking-[0.04em] px-7 py-4 rounded-[8px] flex items-center gap-3 shadow-[0_4px_18px_rgba(99,13,22,0.28)]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            Falar pelo WhatsApp
+          </a>
+
+          <!-- Secondary CTA -->
+          <a href="#trabalhos"
+            class="group flex items-center gap-2.5 text-sm font-[500] text-[#6e6e6e] hover:text-[#1a1a1a] transition-colors duration-250">
+            Ver trabalhos
+            <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform duration-250" fill="none"
+              viewBox="0 0 16 16">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Social proof / stats -->
+        <div class="reveal pt-4 border-t border-black/[0.06]" style="transition-delay: 320ms;">
+          <div class="flex items-center gap-8">
+            <div>
+              <p class="font-[700] text-xl text-[#1a1a1a] tracking-tight">Narrativa</p>
+              <p class="text-[11px] font-[400] text-[#9a9a9a] tracking-[0.08em] uppercase mt-0.5">Design com Propósito
+              </p>
+            </div>
+            <div class="w-px h-8 bg-black/[0.07]"></div>
+            <div>
+              <p class="font-[700] text-xl text-[#1a1a1a] tracking-tight">Exclusivo</p>
+              <p class="text-[11px] font-[400] text-[#9a9a9a] tracking-[0.08em] uppercase mt-0.5">Sem Templates</p>
+            </div>
+            <div class="w-px h-8 bg-black/[0.07]"></div>
+            <div>
+              <p class="font-[700] text-xl text-[#1a1a1a] tracking-tight">VÉRO</p>
+              <p class="text-[11px] font-[400] text-[#9a9a9a] tracking-[0.08em] uppercase mt-0.5">Verdade e Clareza</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ✨ RIGHT: 3D Clay Asset ✨ -->
+      <div class="reveal relative flex items-center justify-center" style="transition-delay: 100ms;">
+
+        <!-- Soft glow behind the asset -->
+        <div class="absolute w-[380px] h-[380px] rounded-full bg-[#630D16]/[0.08] blur-[80px]"></div>
+        <div class="absolute w-[250px] h-[250px] rounded-full bg-amber-100/40 blur-[60px] translate-x-6 -translate-y-6">
+        </div>
+
+        <!-- 3D Clay image container -->
+        <div class="float-asset relative z-10" style="perspective: 900px;">
+          <div class="clay-tilt">
+            <img src="public/ChatGPT Image 23 de mar. de 2026, 03_10_51.png"
+              alt="Asset 3D estilo Clay Matte representando Conexão e Crescimento"
+              class="clay-img w-[360px] md:w-[420px] lg:w-[480px] xl:w-[520px] h-auto object-contain" loading="eager" />
+          </div>
+        </div>
+
+        <!-- Bottom label -->
+        <div
+          class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-black/[0.06] rounded-full shadow-sm">
+          <span class="text-[10px] font-[500] tracking-[0.16em] uppercase text-[#9a9a9a]">Crescimento · Conexão</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+      <span class="text-[10px] tracking-[0.2em] uppercase font-[400] text-[#9a9a9a]">Scroll</span>
+      <div class="w-px h-10 bg-gradient-to-b from-[#9a9a9a] to-transparent"></div>
+    </div>
+
+  </main>
+
+  <!-- --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.-
+       SECTION: Nosso Método Narrativo
+  --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.- -->
+  <section id="trabalhos" class="relative px-8 md:px-16 lg:px-24 py-32 max-w-7xl mx-auto">
+
+    <!-- Section Header -->
+    <div class="reveal mb-20 flex flex-col gap-4" style="transition-delay:0ms">
+      <span class="text-[11px] font-[500] tracking-[0.24em] uppercase text-bordo">Método</span>
+      <div class="flex items-end justify-between flex-wrap gap-6">
+        <h2
+          class="font-satoshi font-[500] text-[2.2rem] md:text-[3rem] tracking-[-0.03em] text-[#1a1a1a] leading-[1.1]">
+          Nosso Método<br />
+          <span class="heading-gradient">Narrativo</span>
+        </h2>
+        <p class="text-sm text-[#9a9a9a] font-[400] max-w-[280px] leading-relaxed mb-1">
+          Cada entrega conecta estética, estratégia e intenção -- para gerar resultado real.
+        </p>
+      </div>
+    </div>
+
+    <!-- -"?-"? Asymmetric Grid -"?-"? -->
+    <div class="relative grid grid-cols-1 lg:grid-cols-3 gap-5 items-stretch">
+
+      <!-- -"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?
+           BLOCO PRINCIPAL: Web Design de Elite
+           2/3 da largura (col-span-2)
+      -"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"? -->
+      <div
+        class="reveal lg:col-span-2 relative rounded-[16px] border border-bordo/40 bg-[#F4F4F4] p-12 md:p-16 flex flex-col justify-between gap-16 overflow-hidden group"
+        style="transition-delay:80ms; min-height: 480px;">
+
+        <!-- Decorative inner glow -->
+        <div class="absolute inset-0 rounded-[16px] opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+          style="background: radial-gradient(ellipse at 20% 50%, rgba(99,13,22,0.04) 0%, transparent 60%); pointer-events:none;">
+        </div>
+
+        <!-- Top area -->
+        <div class="relative z-10 flex flex-col gap-8">
+          <!-- Number tag -->
+          <span class="text-[11px] font-[500] tracking-[0.2em] text-bordo/60 uppercase">01 -- Principal</span>
+
+          <!-- Icon -->
+          <div
+            class="w-12 h-12 rounded-[12px] border border-bordo/20 bg-white flex items-center justify-center shadow-sm">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#630D16" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <path d="M8 21h8M12 17v4" />
+            </svg>
+          </div>
+
+          <!-- Title + description -->
+          <div class="flex flex-col gap-4">
+            <h3
+              class="font-satoshi font-[500] text-[1.8rem] md:text-[2.2rem] tracking-[-0.025em] text-[#1a1a1a] leading-[1.15]">
+              Web Design<br />
+              <span class="heading-gradient">de Elite</span>
+            </h3>
+            <p class="text-[1rem] text-[#5a5a5a] leading-[1.75] max-w-[460px]">
+              Cada pixel tem uma razão estratégica. Criamos interfaces que convertem visitantes em clientes — com
+              narrativa visual clara, hierarquia que guia o olhar e micro-interações que constroem confiança antes mesmo
+              de uma palavra ser lida.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bottom: tags + CTA -->
+        <div class="relative z-10 flex flex-wrap items-center justify-between gap-6">
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="text-[11px] font-[500] tracking-[0.1em] uppercase px-3 py-1.5 rounded-full bg-white border border-black/[0.08] text-[#6b6b6b]">Conversão</span>
+            <span
+              class="text-[11px] font-[500] tracking-[0.1em] uppercase px-3 py-1.5 rounded-full bg-white border border-black/[0.08] text-[#6b6b6b]">UX
+              Premium</span>
+            <span
+              class="text-[11px] font-[500] tracking-[0.1em] uppercase px-3 py-1.5 rounded-full bg-white border border-black/[0.08] text-[#6b6b6b]">Narrativa
+              Visual</span>
+          </div>
+          <a href="https://wa.me/5521988138633?text=Ol%C3%A1!+Vim+pela+V%C3%A9ro+e+gostaria+de+conversar+sobre+um+projeto."
+            target="_blank"
+            class="group/btn flex items-center gap-2 text-sm font-[500] text-bordo hover:gap-3 transition-all duration-300">
+            Quero este serviço
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 16 16">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- -"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?
+           COLUNA DIREITA: 2 cards de apoio
+           + asset 3D flutuando entre eles
+      -"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"? -->
+      <div class="lg:col-span-1 flex flex-col gap-5 relative">
+
+        <!-- Asset 3D -- ancorado na borda entre o bloco principal e a coluna direita -->
+        <div class="absolute top-1/2 -translate-y-1/2 z-20 pointer-events-none" style="width: 220px; left: -110px;">
+          <div class="float-asset">
+            <div class="clay-tilt">
+              <img src="public/ChatGPT Image 23 de mar. de 2026, 03_10_51.png" alt="Asset 3D Clay"
+                class="clay-img w-full h-auto object-contain" loading="eager" />
+            </div>
+          </div>
+        </div>
+
+        <!-- -"?-"? Card apoio 1: Identidade Visual -"?-"? -->
+        <div
+          class="reveal flex-1 rounded-[16px] border border-black/[0.07] bg-transparent p-10 flex flex-col justify-between gap-8 group hover:border-bordo/25 transition-all duration-500"
+          style="transition-delay:160ms; min-height: 200px;">
+          <div class="flex flex-col gap-5">
+            <span class="text-[11px] font-[500] tracking-[0.2em] text-[#b0b0b0] uppercase">02</span>
+            <div
+              class="w-9 h-9 rounded-[10px] border border-black/[0.08] group-hover:border-bordo/30 flex items-center justify-center transition-colors duration-300">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#630D16" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-satoshi font-[500] text-[1.1rem] tracking-[-0.02em] text-[#1a1a1a] mb-2">Identidade Visual
+              </h3>
+              <p class="text-sm text-[#8a8a8a] leading-relaxed">Marcas com alma — do conceito ao sistema visual
+                completo.</p>
+            </div>
+          </div>
+          <div
+            class="w-full h-px bg-gradient-to-r from-bordo/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          </div>
+        </div>
+
+        <!-- -"?-"? Card apoio 2: Narrativa Estratégica -"?-"? -->
+        <div
+          class="reveal flex-1 rounded-[16px] border border-black/[0.07] bg-transparent p-10 flex flex-col justify-between gap-8 group hover:border-bordo/25 transition-all duration-500"
+          style="transition-delay:240ms; min-height: 200px;">
+          <div class="flex flex-col gap-5">
+            <span class="text-[11px] font-[500] tracking-[0.2em] text-[#b0b0b0] uppercase">03</span>
+            <div
+              class="w-9 h-9 rounded-[10px] border border-black/[0.08] group-hover:border-bordo/30 flex items-center justify-center transition-colors duration-300">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#630D16" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-satoshi font-[500] text-[1.1rem] tracking-[-0.02em] text-[#1a1a1a] mb-2">Narrativa
+                Estratégica</h3>
+              <p class="text-sm text-[#8a8a8a] leading-relaxed">Storytelling que posiciona sua marca com autoridade e
+                gera conexão real.</p>
+            </div>
+          </div>
+          <div
+            class="w-full h-px bg-gradient-to-r from-bordo/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.-
+       SECTION: Jornada da Autoridade
+  --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.- -->
+  <section id="sobre" class="bg-[#F0F0F0]">
+    <div class="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-32">
+
+      <!-- Header -->
+      <div class="reveal mb-24 flex flex-col gap-4" style="transition-delay:0ms">
+        <span class="text-[11px] font-[500] tracking-[0.24em] uppercase text-bordo">Narrativa</span>
+        <h2
+          class="font-satoshi font-[500] text-[2.2rem] md:text-[3rem] tracking-[-0.03em] text-[#1a1a1a] leading-[1.1]">
+          Jornada da<br />
+          <span class="heading-gradient">Autoridade</span>
+        </h2>
+      </div>
+
+      <!-- 3-column story grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-0">
+
+        <!-- -"?-"? Col 1: O Silêncio -"?-"? -->
+        <div class="reveal group border-t border-black/[0.09] pt-10 pb-16 pr-0 md:pr-14 flex flex-col gap-8"
+          style="transition-delay:80ms">
+          <!-- Number -->
+          <span
+            class="font-satoshi font-[500] text-[2.8rem] tracking-[-0.04em] text-bordo/20 leading-none select-none">01.</span>
+          <!-- Divider accent -->
+          <div class="w-8 h-[2px] bg-bordo/50"></div>
+          <!-- Title -->
+          <div class="flex flex-col gap-4">
+            <h3 class="font-satoshi font-[500] text-[1.15rem] tracking-[-0.02em] text-[#1a1a1a] leading-snug">
+              O Silêncio
+            </h3>
+            <p class="text-[11px] font-[500] tracking-[0.16em] uppercase text-bordo">O talento que ninguém vê.</p>
+          </div>
+          <!-- Body -->
+          <p class="font-satoshi font-[300] text-[0.95rem] text-[#6a6a6a] leading-[1.85]">
+            Você entrega resultados extraordinários. Mas online, sua marca sussurra quando deveria declarar. O mercado
+            não compra talento — compra a percepção de talento. E sem uma narrativa visual de alto nível, o seu melhor
+            concorrente — muitas vezes menos qualificado — está sendo escolhido no seu lugar.
+          </p>
+          <!-- Bottom micro-label -->
+          <span class="mt-auto text-[10px] font-[500] tracking-[0.2em] uppercase text-[#b0b0b0]">A dor</span>
+        </div>
+
+        <!-- Vertical divider (desktop only) -->
+        <div class="hidden md:block absolute" style="display:none"></div>
+
+        <!-- -"?-"? Col 2: A Ponte -"?-"? -->
+        <div
+          class="reveal group border-t border-black/[0.09] pt-10 pb-16 px-0 md:px-14 flex flex-col gap-8 md:border-l border-black/[0.09]"
+          style="transition-delay:160ms">
+          <span
+            class="font-satoshi font-[500] text-[2.8rem] tracking-[-0.04em] text-bordo/20 leading-none select-none">02.</span>
+          <div class="w-8 h-[2px] bg-bordo/50"></div>
+          <div class="flex flex-col gap-4">
+            <h3 class="font-satoshi font-[500] text-[1.15rem] tracking-[-0.02em] text-[#1a1a1a] leading-snug">
+              A Ponte
+            </h3>
+            <p class="text-[11px] font-[500] tracking-[0.16em] uppercase text-bordo">A narrativa que conecta.</p>
+          </div>
+          <p class="font-satoshi font-[300] text-[0.95rem] text-[#6a6a6a] leading-[1.85]">
+            Nosso design 2026 não é decoração — é arquitetura de percepção. Construímos a presença digital que
+            transforma seu posicionamento em atração genuína. Cada elemento visual conta sua história antes de você
+            dizer uma palavra: de quem você é, o que você entrega e por que você é a escolha óbvia.
+          </p>
+          <span class="mt-auto text-[10px] font-[500] tracking-[0.2em] uppercase text-[#b0b0b0]">A solução</span>
+        </div>
+
+        <!-- -"?-"? Col 3: O Destino -"?-"? -->
+        <div
+          class="reveal group border-t border-black/[0.09] pt-10 pb-16 pl-0 md:pl-14 flex flex-col gap-8 md:border-l border-black/[0.09]"
+          style="transition-delay:240ms">
+          <span
+            class="font-satoshi font-[500] text-[2.8rem] tracking-[-0.04em] text-bordo/20 leading-none select-none">03.</span>
+          <div class="w-8 h-[2px] bg-bordo/70"></div>
+          <div class="flex flex-col gap-4">
+            <h3 class="font-satoshi font-[500] text-[1.15rem] tracking-[-0.02em] text-[#1a1a1a] leading-snug">
+              O Destino
+            </h3>
+            <p class="text-[11px] font-[500] tracking-[0.16em] uppercase text-bordo">O próximo nível do seu lucro.</p>
+          </div>
+          <p class="font-satoshi font-[300] text-[0.95rem] text-[#6a6a6a] leading-[1.85]">
+            Quando sua marca comunica autoridade com precisão, o mercado te procura — não o contrário. Clientes de alto
+            valor identificam líderes pelo que veem. Sua presença digital passa a ser o seu melhor vendedor: trabalhando
+            24h, filtrando quem realmente valoriza o que você oferece e fechando o preço que você merece.
+          </p>
+          <!-- CTA inline -->
+          <a href="https://wa.me/5521988138633?text=Ol%C3%A1!+Vim+pela+V%C3%A9ro+e+gostaria+de+conversar+sobre+um+projeto."
+            target="_blank"
+            class="mt-auto group/cta flex items-center gap-2 text-sm font-[500] text-bordo hover:gap-3 transition-all duration-300">
+            Quero chegar lá
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 16 16">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+          <span class="text-[10px] font-[500] tracking-[0.2em] uppercase text-[#b0b0b0]">O resultado</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.-
+       SECTION: O Observador
+  --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.- -->
+  <section class="relative bg-offwhite overflow-hidden">
+
+    <!-- -"?-"? Watermark "07" -"?-"? -->
+    <div
+      class="absolute inset-0 flex items-center justify-end pointer-events-none select-none overflow-hidden pr-8 md:pr-16"
+      aria-hidden="true">
+      <span
+        class="font-satoshi font-[700] text-[22rem] md:text-[28rem] leading-none tracking-[-0.06em] text-black/[0.03]"
+        style="line-height:1">07</span>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-32 md:py-40">
+
+      <!-- Section label -->
+      <div class="reveal mb-20" style="transition-delay:0ms">
+        <span class="text-[11px] font-[500] tracking-[0.24em] uppercase text-bordo">O Observador</span>
+      </div>
+
+      <!-- -"?-"? Main editorial grid: photo + text -"?-"? -->
+      <div class="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-16 lg:gap-24 items-start">
+
+        <!-- -"?-"? LEFT: Photo editorial -"?-"? -->
+        <div class="reveal flex flex-col gap-6" style="transition-delay:60ms">
+
+          <!-- Photo wrapper -- editorial portrait format -->
+          <div class="relative group">
+            <!-- Bordô accent line left -->
+            <div
+              class="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-bordo via-bordo/50 to-transparent z-10 rounded-full">
+            </div>
+            <!-- Photo container -->
+            <div class="ml-5 relative overflow-hidden rounded-[4px]" style="aspect-ratio: 4/5; max-width: 380px;">
+              <img src="public/foto.jpg" alt="Designer -- O Observador"
+                class="w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-[1.02]"
+                style="filter: contrast(1.06) saturate(1.05);" />
+              <!-- Subtle vignette overlay -->
+              <div class="absolute inset-0 pointer-events-none"
+                style="background: linear-gradient(to bottom, transparent 60%, rgba(249,249,249,0.18) 100%);"></div>
+            </div>
+            <!-- Caption under photo -->
+            <div class="mt-4 ml-5 flex items-center gap-3">
+              <span class="w-4 h-px bg-bordo/40"></span>
+              <span class="text-[10px] font-[500] tracking-[0.2em] uppercase text-[#b0b0b0]">7 anos · Design &
+                Narrativa</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- -"?-"? RIGHT: Narrative text -"?-"? -->
+        <div class="reveal flex flex-col gap-10 pt-0 lg:pt-4" style="transition-delay:140ms">
+
+          <!-- Headline -->
+          <h2
+            class="font-satoshi font-[500] text-[1.9rem] md:text-[2.5rem] lg:text-[2.9rem] tracking-[-0.03em] text-[#1a1a1a] leading-[1.12]">
+            <span style="color:#630D16;">VÉRO.</span><br />
+            Onde sua visão encontra<br />
+            <span class="heading-gradient">estrutura e cuidado.</span>
+          </h2>
+
+          <!-- Divider -->
+          <div class="w-10 h-[2px]" style="background:#630D16;"></div>
+
+          <!-- Body text -->
+          <div class="flex flex-col gap-5">
+            <p class="font-satoshi font-[300] text-[1rem] md:text-[1.05rem] text-[#5a5a5a] leading-[1.9]">
+              O <strong class="font-[500] text-[#1a1a1a]">VÉRO</strong> nasceu de um olhar atento: o mercado hoje
+              entrega o genérico, mas o que você precisa é de <strong
+                class="font-[500] text-[#3d3d3d]">identidade.</strong> Após 7 anos refinando a técnica, entendi que o
+              design de excelência só acontece quando há uma conexão real.
+            </p>
+            <p class="font-satoshi font-[300] text-[1rem] md:text-[1.05rem] text-[#5a5a5a] leading-[1.9]">
+              <em>VÉRO significa Verdade,</em> e minha missão é abraçar o seu propósito para arquitetar uma narrativa
+              digital que não apenas venda, mas que faça você <strong class="font-[500] text-[#3d3d3d]">sentir orgulho
+                de ser visto.</strong>
+            </p>
+            <p class="font-satoshi font-[300] text-[1rem] md:text-[1.05rem] text-[#5a5a5a] leading-[1.9]">
+              Aqui, tratamos cada projeto com a responsabilidade de quem cuida do próprio legado. <strong
+                class="font-[500] text-[#1a1a1a]">Cada pixel é um compromisso com a sua história.</strong>
+            </p>
+          </div>
+
+          <!-- Mission statement in bordô -->
+          <div class="flex items-start gap-3 pt-2">
+            <span class="mt-1.5 w-4 h-px flex-shrink-0" style="background:#630D16;"></span>
+            <p class="font-satoshi font-[300] text-[0.85rem] leading-[1.7]" style="color:#630D16;">
+              Minha missão é garantir que a alma da sua empresa seja vista e respeitada.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.-
+       SECTION: O Acordo de Excelência
+  --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.- -->
+  <section id="contato" class="bg-offwhite px-8 md:px-16 lg:px-24 py-32">
+    <div class="max-w-5xl mx-auto flex flex-col items-center gap-20">
+
+      <!-- -"?-"? Cabeçalho centralizado -"?-"? -->
+      <div class="reveal text-center flex flex-col gap-6 max-w-3xl" style="transition-delay:0ms">
+        <span class="text-[11px] font-[500] tracking-[0.24em] uppercase text-bordo">Nosso Método Narrativo</span>
+        <h2
+          class="font-satoshi font-[500] text-[2.2rem] md:text-[3rem] tracking-[-0.03em] text-[#1a1a1a] leading-[1.1]">
+          Como damos forma<br />
+          <span class="heading-gradient">à sua visão</span>
+        </h2>
+        <!-- Manifesto -->
+        <p class="font-satoshi font-[300] text-[1.05rem] text-[#6a6a6a] leading-[1.85] max-w-[600px] mx-auto">
+          Um design sólido não nasce do acaso. Ele é fruto de um processo estruturado de <strong
+            class="font-[500] text-[#3d3d3d]">escuta e técnica.</strong> No VÉRO, trabalhamos ao seu lado para garantir
+          que cada decisão visual tenha um propósito claro e um objetivo real.
+        </p>
+      </div>
+
+      <!-- -"?-"? 3 Pilares -- layout assimétrico -"?-"? -->
+      <div class="reveal w-full divide-y divide-black/[0.07]" style="transition-delay:80ms">
+
+        <!-- Pilar 1 -->
+        <div
+          class="group grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-16 py-10 md:py-14 hover:pl-2 transition-all duration-500">
+          <!-- Label -->
+          <div class="flex items-start gap-4 md:gap-6">
+            <span
+              class="font-satoshi font-[500] text-[2rem] tracking-[-0.04em] text-bordo/20 leading-none mt-0.5 select-none">01</span>
+            <div class="flex flex-col gap-1 pt-1">
+              <h3 class="font-satoshi font-[500] text-base text-[#1a1a1a] tracking-tight">Briefing Humano</h3>
+              <span class="text-[10px] font-[500] tracking-[0.16em] uppercase text-bordo/70">Escuta ativa</span>
+            </div>
+          </div>
+          <!-- Conteúdo -->
+          <div class="flex flex-col gap-4">
+            <p class="font-satoshi font-[300] text-[0.95rem] text-[#6a6a6a] leading-[1.85]">
+              Nossa primeira etapa é uma conversa franca via WhatsApp. Queremos entender seus objetivos, seus desafios e
+              o que você espera colher com este projeto. <strong class="font-[500] text-[#3d3d3d]">Sua visão é a base de
+                toda a nossa estrutura.</strong>
+            </p>
+            <div class="flex items-center gap-2 text-[11px] font-[500] tracking-[0.1em] uppercase text-[#b0b0b0]">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#630D16" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="opacity-60">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              Via WhatsApp
+            </div>
+          </div>
+        </div>
+
+        <!-- Pilar 2 -->
+        <div
+          class="group grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-16 py-10 md:py-14 hover:pl-2 transition-all duration-500">
+          <div class="flex items-start gap-4 md:gap-6">
+            <span
+              class="font-satoshi font-[500] text-[2rem] tracking-[-0.04em] text-bordo/20 leading-none mt-0.5 select-none">02</span>
+            <div class="flex flex-col gap-1 pt-1">
+              <h3 class="font-satoshi font-[500] text-base text-[#1a1a1a] tracking-tight">Transformação A → B</h3>
+              <span class="text-[10px] font-[500] tracking-[0.16em] uppercase text-bordo/70">Design estratégico</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4">
+            <p class="font-satoshi font-[300] text-[0.95rem] text-[#6a6a6a] leading-[1.85]">
+              Criamos a estrutura visual e narrativa que tira sua empresa da invisibilidade digital e a posiciona no
+              topo do mercado. Do conceito à tela final, cada decisão é orientada por uma única pergunta: isso vai gerar
+              conversão e autoridade?
+            </p>
+            <div class="flex items-center gap-3">
+              <span
+                class="text-[10px] font-[500] tracking-[0.1em] uppercase px-2.5 py-1 rounded-full bg-black/[0.04] text-[#8a8a8a]">Invisível</span>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="#630D16" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span
+                class="text-[10px] font-[500] tracking-[0.1em] uppercase px-2.5 py-1 rounded-full bg-bordo/10 text-bordo">Autoridade</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pilar 3 -->
+        <div
+          class="group grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-16 py-10 md:py-14 hover:pl-2 transition-all duration-500">
+          <div class="flex items-start gap-4 md:gap-6">
+            <span
+              class="font-satoshi font-[500] text-[2rem] tracking-[-0.04em] text-bordo/20 leading-none mt-0.5 select-none">03</span>
+            <div class="flex flex-col gap-1 pt-1">
+              <h3 class="font-satoshi font-[500] text-base text-[#1a1a1a] tracking-tight">Compromisso e Transparência
+              </h3>
+              <span class="text-[10px] font-[500] tracking-[0.16em] uppercase text-bordo/70">Segurança total</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4">
+            <p class="font-satoshi font-[300] text-[0.95rem] text-[#6a6a6a] leading-[1.85]">
+              Trabalhamos com um modelo de investimento claro e seguro. O valor é dividido em duas etapas (<strong
+                class="font-[500] text-[#3d3d3d]">entrada e entrega final</strong>), garantindo que ambos estejamos
+              totalmente comprometidos com o sucesso do resultado.
+            </p>
+            <div class="flex items-center gap-6">
+              <div class="flex flex-col gap-0.5">
+                <span class="text-[10px] font-[500] tracking-[0.1em] uppercase text-[#b0b0b0]">Entrada</span>
+                <span class="font-[500] text-sm text-[#1a1a1a]">50%</span>
+              </div>
+              <div class="w-24 h-px bg-gradient-to-r from-bordo/40 to-bordo/10 relative">
+                <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-bordo/40"></div>
+              </div>
+              <div class="flex flex-col gap-0.5">
+                <span class="text-[10px] font-[500] tracking-[0.1em] uppercase text-[#b0b0b0]">Na entrega</span>
+                <span class="font-[500] text-sm text-[#1a1a1a]">50%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- -"?-"? CTA Final -"?-"? -->
+      <div class="reveal flex flex-col items-center gap-6 text-center" style="transition-delay:160ms">
+        <p class="text-xs font-[400] tracking-[0.12em] text-[#b0b0b0] uppercase">Vagas limitadas por mês</p>
+        <a href="https://wa.me/5521988138633?text=Ol%C3%A1!+Vim+pela+V%C3%A9ro+e+gostaria+de+conversar+sobre+um+projeto."
+          target="_blank"
+          class="btn-bordo bg-bordo text-white font-[500] text-base tracking-[0.03em] px-10 py-5 rounded-[10px] flex items-center gap-4 shadow-[0_8px_32px_rgba(99,13,22,0.32)]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          </svg>
+          Iniciar meu projeto exclusivo
+        </a>
+        <p class="text-[11px] font-[300] text-[#b0b0b0]">Resposta em até 2h · Sem compromisso</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.-
+       FOOTER MINIMALISTA
+  --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.- -->
+  <footer class="bg-[#F9F9F9] border-t border-black/[0.05]">
+    <div
+      class="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+      <!-- Brand -->
+      <div class="flex items-center">
+        <img src="public/ChatGPT Image 23 de mar. de 2026, 11_55_59.png" alt="Logo" class="h-20 w-auto object-contain" />
+      </div>
+      <!-- Tagline -->
+      <p class="font-satoshi font-[300] text-[12px] text-[#b0b0b0] tracking-[0.04em] text-center">
+        © 2026 -- <strong class="font-[500] text-[#1a1a1a]">Véro Archi e Design.</strong> Design com Alma e Estratégia.
+      </p>
+      <!-- Back to top -->
+      <a href="#"
+        class="text-[11px] font-[500] tracking-[0.12em] uppercase text-[#9a9a9a] hover:text-bordo transition-colors duration-200 flex items-center gap-1.5">
+        Topo
+        <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
+          <path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+  </footer>
+
+  <!-- --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.-
+       SCRIPTS
+  --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.- -->
+  <script>
+    // -"?-"?-"? Cursor Glow -"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?
+    const glow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', (e) => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+    });
+
+    // -"?-"?-"? Scroll Reveal -"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?-"?
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Immediately reveal hero elements
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          el.classList.add('visible');
+        }
+      });
+    }, 50);
+  </script>
+</body>
+
+</html>
