@@ -640,76 +640,78 @@
   <!-- --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.-
        SECTION: Portfólio - Projetos de Impacto
   --------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.---------------------.--.- -->
-  <section id="portfolio" class="relative px-8 md:px-16 lg:px-24 py-32 bg-white overflow-hidden">
+  <section id="portfolio" class="relative px-8 md:px-16 lg:px-24 py-32 bg-[#F9F9F9] overflow-hidden">
     
-    <!-- Decorative background elements -->
-    <div class="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-bordo/[0.03] blur-[100px] pointer-events-none"></div>
-    <div class="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-amber-500/[0.02] blur-[80px] pointer-events-none"></div>
+    <!-- Subtle background elements -->
+    <div class="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-bordo/[0.02] blur-[100px] pointer-events-none"></div>
 
     <div class="max-w-7xl mx-auto">
       
       <!-- Section Header -->
-      <div class="reveal mb-20 flex flex-col gap-4" style="transition-delay:0ms">
-        <span class="text-[11px] font-[500] tracking-[0.24em] uppercase text-bordo">Portfólio</span>
-        <div class="flex items-end justify-between flex-wrap gap-6">
-          <h2 class="font-satoshi font-[500] text-[2.2rem] md:text-[3rem] tracking-[-0.03em] text-[#1a1a1a] leading-[1.1]">
+      <div class="reveal mb-24 flex flex-col gap-4" style="transition-delay:0ms">
+        <span class="text-[11px] font-[500] tracking-[0.24em] uppercase text-bordo">Curadoria</span>
+        <div class="flex items-end justify-between flex-wrap gap-8">
+          <h2 class="font-satoshi font-[500] text-[2.2rem] md:text-[3.2rem] tracking-[-0.03em] text-[#1a1a1a] leading-[1.1]">
             Projetos de<br />
             <span class="heading-gradient">Impacto</span>
           </h2>
-          <p class="text-sm text-[#9a9a9a] font-[400] max-w-[320px] leading-relaxed mb-1">
-            Onde a estratégia se torna estrutura digital. Uma curadoria de marcas que escolheram a clareza.
+          <p class="text-[15px] text-[#9a9a9a] font-[400] max-w-[340px] leading-relaxed mb-1">
+            Uma seleção de marcas que escolheram a clareza estratégica e o design de alta performance.
           </p>
         </div>
       </div>
 
-      <!-- Project Grid -->
-      <div class="grid grid-cols-1 gap-24">
+      <!-- Project Showcase Card (Apple-style Minimalism) -->
+      <div class="reveal group relative bg-white rounded-[24px] border border-black/[0.04] shadow-[0_20px_40px_rgba(0,0,0,0.02)] overflow-hidden transition-all duration-500 hover:shadow-[0_32px_64px_rgba(0,0,0,0.04)] hover:border-black/[0.08]" style="transition-delay:120ms">
         
-        <!-- Project 1: Base Financeira -->
-        <div class="reveal group grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" style="transition-delay:100ms">
+        <div class="grid grid-cols-1 lg:grid-cols-[7fr_5fr]">
           
-          <!-- Image Column -->
-          <div class="relative overflow-hidden rounded-[20px] bg-[#f8f8f8] border border-black/[0.03] aspect-[16/10] group-hover:shadow-2xl transition-all duration-700">
-            <img src="public/base_financeira_mockup.png" alt="Card Base Financeira - Mockup" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-            <!-- Overlay gradient -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <!-- Image Column (Real Screenshot) -->
+          <div class="relative bg-[#fcfcfc] overflow-hidden flex items-center justify-center p-4 lg:p-0">
+            <div class="relative w-full h-full overflow-hidden">
+               <img src="public/base_financeira_real.png" alt="Plataforma Base Financeira" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.02]" />
+               <!-- Subtle inner shine -->
+               <div class="absolute inset-0 pointer-events-none border border-white/20 rounded-[24px]"></div>
+            </div>
           </div>
 
-          <!-- Text Column -->
-          <div class="flex flex-col gap-8 lg:pl-6">
-            <div class="flex flex-col gap-4">
+          <!-- Content Column -->
+          <div class="p-10 md:p-14 lg:p-16 flex flex-col justify-center gap-10">
+            
+            <div class="flex flex-col gap-6">
               <div class="flex items-center gap-3">
-                <span class="w-8 h-px bg-bordo/40"></span>
-                <span class="text-[10px] font-[600] tracking-[0.2em] uppercase text-bordo">Fintech · Landing Page</span>
+                <span class="text-[10px] font-[600] tracking-[0.2em] uppercase text-bordo/80">Fintech · Interface & UX</span>
               </div>
-              <h3 class="font-satoshi font-[500] text-[1.8rem] md:text-[2.2rem] tracking-[-0.02em] text-[#1a1a1a] leading-tight">
+              
+              <h3 class="font-satoshi font-[500] text-[2rem] md:text-[2.6rem] tracking-[-0.02em] text-[#1a1a1a] leading-tight">
                 Base Financeira
               </h3>
-              <p class="font-satoshi font-[400] text-[1.05rem] text-[#6e6e6e] leading-[1.75]">
-                Estruturação completa de narrativa e interface para uma plataforma de gestão financeira inteligente. O desafio foi traduzir dados complexos em uma experiência fluida e conectada ao WhatsApp, eliminando a barreira das planilhas tradicionais.
+              
+              <p class="font-satoshi font-[400] text-[1.05rem] text-[#6e6e6e] leading-[1.8] max-w-[420px]">
+                Estruturação de interface e narrativa para uma plataforma de gestão financeira inteligente. Focamos em simplificar dados complexos através de uma experiência conectada ao WhatsApp — eliminando planilhas e gerando clareza imediata.
               </p>
             </div>
 
-            <!-- Tags -->
-            <div class="flex flex-wrap gap-2">
-               <span class="text-[10px] font-[500] tracking-[0.05em] px-3 py-1.5 rounded-full bg-[#f4f4f4] text-[#8a8a8a]">Interface Dark</span>
-               <span class="text-[10px] font-[500] tracking-[0.05em] px-3 py-1.5 rounded-full bg-[#f4f4f4] text-[#8a8a8a]">WhatsApp Integration</span>
-               <span class="text-[10px] font-[500] tracking-[0.05em] px-3 py-1.5 rounded-full bg-[#f4f4f4] text-[#8a8a8a]">Estratégia de Conversão</span>
+            <!-- Minimalist Project Link -->
+            <div class="flex items-center justify-between mt-4">
+              <a href="https://base-financeira.vercel.app/" target="_blank" 
+                 class="group/link inline-flex items-center gap-4 text-sm font-[600] text-[#1a1a1a] transition-all duration-300">
+                <span class="relative">
+                  Explorar Projeto
+                  <span class="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-bordo group-hover/link:w-full transition-all duration-500"></span>
+                </span>
+                <div class="w-10 h-10 rounded-full border border-black/[0.06] flex items-center justify-center group-hover/link:border-bordo group-hover/link:bg-bordo group-hover/link:text-white transition-all duration-300">
+                  <svg class="w-4 h-4 transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </div>
+              </a>
+              
+              <!-- Subtle year indicator -->
+              <span class="text-[10px] font-[500] tracking-[0.2em] uppercase text-[#d0d0d0]">© 2026</span>
             </div>
 
-            <!-- Link -->
-            <a href="https://base-financeira.vercel.app/" target="_blank" class="group/link inline-flex items-center gap-4 text-sm font-[600] text-[#1a1a1a] hover:text-bordo transition-colors duration-300">
-              <span class="relative">
-                Explorar Projeto
-                <span class="absolute -bottom-1 left-0 w-0 h-px bg-bordo group-hover/link:w-full transition-all duration-500"></span>
-              </span>
-              <div class="w-8 h-8 rounded-full border border-black/[0.08] flex items-center justify-center group-hover/link:border-bordo/30 group-hover/link:bg-bordo/[0.02] transition-all duration-300">
-                <svg class="w-3.5 h-3.5 transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </div>
-            </a>
           </div>
 
         </div>
